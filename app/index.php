@@ -1,22 +1,11 @@
 <?php
-
-$dbuser = $_ENV['MYSQL_USER'];
-$dbpass = $_ENV['MYSQL_PASS'];
-
-try {
-    $pdo = new PDO("mysql:host=mysql;dbname=blog", $dbuser, $dbpass);
-    $statement = $pdo->prepare("SELECT * FROM posts");
-    $statement->execute();
-    $posts = $statement->fetchAll(PDO::FETCH_OBJ);
-    
-    echo "<h2>Posts</h2>";
-    echo "<ul>";
-    foreach ($posts as $post ) {
-        echo "<li>".$post->title."</li>";
+  $login_cookie = $_COOKIE['login'];
+    if(isset($login_cookie)){
+      echo"Bem-Vindo, $login_cookie <br>";
+      echo"Essas informações <font color='red'>PODEM</font> ser acessadas por você";
+    }else{
+      echo"Bem-Vindo, convidado <br>";
+      echo"Essas informações <font color='red'>NÃO PODEM</font> ser acessadas por você";
+      echo"<br><a href='login.html'>Faça Login</a> Para ler o conteúdo";
     }
-    echo "</ul>";
-
-} catch(PDOException $e) {
-    echo $e->getMessage();
-}
-
+?>
