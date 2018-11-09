@@ -1,9 +1,12 @@
 <?php 
- 
+define('HOST', '127.0.0.1');
+define('USUARIO', 'root');
+define('SENHA', '123.456');
+define('DB', 'db');
 $login = $_POST['login'];
 $senha = MD5($_POST['senha']);
-$connect = mysql_connect('127.0.0.1:80','root','123.456');
-$db = mysql_select_db('db');
+$connect = mysql_connect(HOST, USUARIO, SENHA, DB);
+$db = mysql_select_db(DB);
 $query_select = "SELECT login FROM cadastro WHERE login = '$login'";
 $select = mysql_query($query_select,$connect);
 $array = mysql_fetch_array($select);
@@ -19,7 +22,7 @@ $logarray = $array['login'];
         die();
  
       }else{
-        $query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senha')";
+        $query = "INSERT INTO cadastro (login,senha) VALUES ('$login','$senha')";
         $insert = mysql_query($query,$connect);
          
         if($insert){
