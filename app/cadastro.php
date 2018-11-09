@@ -1,30 +1,28 @@
-<?php 
-define('DB_HOST'        , "127.0.0.1");
-define('DB_USER'        , "root");
-define('DB_PASSWORD'    , "123.456");
-define('DB_NAME'        , "db");
-define('DB_DRIVER'      , "sqlsrv");
-  
-require_once "Conexao.php";
+<?php
+session_start();
+include('conexao.php');
  
-  if($login == "" || $login == null){
-    echo"<script language='javascript' type='text/javascript'>alert('O campo login deve ser preenchido');window.location.href='cadastro.html';</script>";
+if(empty($_POST['usuario']) || empty($_POST['senha'])) {
+	header('Location: index.php');
+	exit();
+}
  
-    }else{
-      if($logarray == $login){
+$usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
+$senha = mysqli_real_escape_string($conexao, $_POST['senha']);
  
-        echo"<script language='javascript' type='text/javascript'>alert('Esse login já existe');window.location.href='cadastro.html';</script>";
-        die();
+$query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senha')";
+$insert = mysql_query($query,$conexao);
  
-      }else{
-        $Conexao    = Conexao::getConnection();
-        $query = "INSERT INTO cadastro (login,senha) VALUES ('$login','$senha')";
-         
-        if($Conexao){
-          echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login.html'</script>";
-        }else{
-          echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
-        }
-      }
-    }
-?>
+$result = mysqli_query($conexao, $query);
+ 
+$row = mysqli_num_rows($result);
+ 
+if($row == 1) {
+	$_SESSION['usuario'] = $usuario;
+	header('Location: painel.php');
+	exit();
+} else {
+	$_SESSION['nao_autenticado'] = true;
+	header('Location: index.php');
+	exit();
+}
