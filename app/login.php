@@ -7,12 +7,12 @@ if(empty($_POST['usuario']) || empty($_POST['senha'])) {
 	exit();
 }
 
-$usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-$senha = mysqli_real_escape_string($conexao, $_POST['senha']);
+$usuario = mysqli_real_escape_string($pdo, $_POST['usuario']);
+$senha = mysqli_real_escape_string($pdo, $_POST['senha']);
  
 $query = "select usuario from cadastro where usuario = '{$usuario}' and senha = '{$senha}'";
  
-$result = mysqli_query($conexao, $query);
+$result = mysqli_query($pdo, $query);
  
 $row = mysqli_num_rows($result);
  
