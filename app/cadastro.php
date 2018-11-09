@@ -10,4 +10,4 @@ if(empty($_POST['usuario']) || empty($_POST['senha'])) {
 $stmt = $pdo->prepare('INSERT INTO cadastro (usuario, senha) VALUES(:usuario, :senha)');
 $stmt->execute(array(':usuario' => $usuario, ':senha' => $senha,));
 HEADER('LOCATION: login.php');
-:>
+?>
