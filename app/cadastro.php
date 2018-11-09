@@ -1,16 +1,11 @@
 <?php 
-define('HOST', '127.0.0.1');
-define('USUARIO', 'root');
-define('SENHA', '123.456');
-define('DB', 'db');
-$login = $_POST['login'];
-$senha = MD5($_POST['senha']);
-$connect = mysqli_connect(HOST, USUARIO, SENHA, DB);
-$db = mysql_select_db(DB);
-$query_select = "SELECT login FROM cadastro WHERE login = '$login'";
-$select = mysql_query($query_select,$connect);
-$array = mysql_fetch_array($select);
-$logarray = $array['login'];
+define('DB_HOST'        , "127.0.0.1");
+define('DB_USER'        , "root");
+define('DB_PASSWORD'    , "123.456");
+define('DB_NAME'        , "db");
+define('DB_DRIVER'      , "sqlsrv");
+  
+require_once "Conexao.php";
  
   if($login == "" || $login == null){
     echo"<script language='javascript' type='text/javascript'>alert('O campo login deve ser preenchido');window.location.href='cadastro.html';</script>";
@@ -22,10 +17,10 @@ $logarray = $array['login'];
         die();
  
       }else{
+        $Conexao    = Conexao::getConnection();
         $query = "INSERT INTO cadastro (login,senha) VALUES ('$login','$senha')";
-        $insert = mysql_query($query,$connect);
          
-        if($insert){
+        if($Conexao){
           echo"<script language='javascript' type='text/javascript'>alert('Usuário cadastrado com sucesso!');window.location.href='login.html'</script>";
         }else{
           echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
