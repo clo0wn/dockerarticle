@@ -6,7 +6,7 @@ if(empty($_POST['usuario']) || empty($_POST['senha'])) {
 	header('Location: index.php');
 	exit();
 }
-
+$pdo = new PDO("mysql:host=mysql;dbname=db", 'root', '123.456');
 $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
 $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
  
