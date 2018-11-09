@@ -7,22 +7,23 @@ if(empty($_POST['usuario']) || empty($_POST['senha'])) {
 	exit();
 }
 
-$usuario = mysqli_real_escape_string($pdo, $_POST['usuario']);
-$senha = mysqli_real_escape_string($pdo, $_POST['senha']);
+$usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+$senha = isset($_POST['senha']) ? $_POST['senha'] : '';
  
-$query = "select usuario from cadastro where usuario = '{$usuario}' and senha = '{$senha}'";
+$sql = "SELECT usuario FROM cadastro WHERE usuario = :usuario AND senha = :senha";
+$stmt = $pdo->prepare($sql);
  
-$result = mysqli_query($pdo, $query);
+$stmt->bindParam(':usuario', $usuario);
+$stmt->bindParam(':senha', $senha);
  
-$row = mysqli_num_rows($result);
+$stmt->execute();
  
-if($row == 1) {
-	$_SESSION['usuario'] = $usuario;
-	header('Location: painel.php');
-	exit();
-} else {
-	$_SESSION['nao_autenticado'] = true;
-	header('Location: index.php');
-	exit();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+if (count($users) <= 0)
+{
+    echo "Usuário ou senha incorretos";
+    exit;
 }
+header('Location: painel.php');
 ?>
