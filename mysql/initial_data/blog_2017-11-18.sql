@@ -15,10 +15,10 @@ USE `db`;
 DROP TABLE IF EXISTS `cadastro`;
 
 CREATE TABLE `cadastro` (
-  `usuario_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `usuario` varchar(200) NOT NULL DEFAULT '',
   `senha` varchar(32) NOT NULL,
-  PRIMARY KEY (`usuario_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `cadastro` WRITE;
