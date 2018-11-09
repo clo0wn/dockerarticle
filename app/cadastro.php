@@ -5,7 +5,7 @@ define('SENHA', '123.456');
 define('DB', 'db');
 $login = $_POST['login'];
 $senha = MD5($_POST['senha']);
-$connect = mysql_connect(HOST, USUARIO, SENHA, DB);
+$connect = mysqli_connect(HOST, USUARIO, SENHA, DB);
 $db = mysql_select_db(DB);
 $query_select = "SELECT login FROM cadastro WHERE login = '$login'";
 $select = mysql_query($query_select,$connect);
