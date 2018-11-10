@@ -2,28 +2,35 @@
 session_start();
 include('conexao.php');
  
+$usuario = strtoupper($_POST['usuario']);
+$senha = strtoupper($_POST['senha']);
+
 if(empty($_POST['usuario']) || empty($_POST['senha'])) {
-	header('Location: index.php');
+	header('Location: login.html');
 	exit();
 }
-$pdo = new PDO("mysql:host=mysql;dbname=db", 'root', '123.456');
-$usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
-$senha = isset($_POST['senha']) ? $_POST['senha'] : '';
- 
-$sql = "SELECT usuario FROM cadastro WHERE usuario = :usuario AND senha = :senha";
+
+$sql = "SELECT login FROM cadastro WHERE login = :usuario AND senha = :senha";
 $stmt = $pdo->prepare($sql);
- 
+
 $stmt->bindParam(':usuario', $usuario);
 $stmt->bindParam(':senha', $senha);
  
 $stmt->execute();
- 
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
- 
-if (count($users) <= 0)
+
+$numero_registro = $stmt->rowCount();
+if($numero_registro!=0)
 {
-    echo "Usuário ou senha incorretos";
-    exit;
+	$_SESSION['usuario'] = $usuario;
+    header("Location:painel.php");
+	exit();
+} else {
+	$_SESSION['nao_autenticado'] = true;
+    header("Location:login.html");
+	exit();
 }
-header('Location: painel.php');
+{
+die("Error:" . $e->getMessage());
+}
 ?>
+

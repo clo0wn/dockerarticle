@@ -4,6 +4,7 @@ define('USUARIO', 'root');
 define('SENHA', '123.456');
 define('DB', 'db');
 
+$pdo = new PDO("mysql:host=mysql;dbname=db", 'root', '123.456');
 function db_connect()
 {
     $pdo = new PDO("mysql:host=mysql;dbname=db", 'root', '123.456');
