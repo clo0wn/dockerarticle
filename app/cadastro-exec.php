@@ -10,7 +10,7 @@ $senha = $_POST['senha'];
 
 $pdo = new PDO("mysql:host=mysql;dbname=db", $dbuser, $dbpass);
 
-$stmt = $pdo->prepare('INSERT INTO cadastro (login, senha) VALUES(:Usuario, :Senha)');
+$stmt = $pdo->prepare('INSERT INTO cadastro (usuario, senha) VALUES(:Usuario, :Senha)');
 
 $stmt->execute(array(':Usuario' => $usuario, ':Senha' => $senha,));
 
