@@ -1,0 +1,51 @@
+* {
+	margin:0;
+	padding0;
+}
+
+html,body {
+	background: #f2f7fa;
+	font-family: 'Open Sans', serif;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+#div1 {
+	margin:20px;
+	padding:20px;
+	background-color:#87CEEB;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	box-shadow:2px 2px 2px #696969;
+}
+#titulo {
+	text-transform:uppercase;
+	text-align:center;
+}
+
+#sair{
+	text-align:right;
+}
+
+#div2 {
+	margin:20px;
+	padding:20px;
+	background-color:#C0C0C0;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	box-shadow:2px 2px 2px #696969;
+}
+
+#titulo_index {
+	text-align:center;
+	font-family: 'Open Sans', serif;
+	font-size: 30px;
+}
+
+#facalogin {
+	text-align:center;
+	font-family: 'Open Sans', serif;
+	font-size: 30px;
+}
