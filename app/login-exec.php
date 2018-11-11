@@ -10,7 +10,7 @@ $senha = $_POST['senha'];
 
 $pdo = new PDO("mysql:host=mysql;dbname=db", $dbuser, $dbpass);
 
-$statement = $pdo->prepare("SELECT * FROM cadastro WHERE login = :usuario AND senha = :senha");
+$statement = $pdo->prepare("SELECT * FROM cadastro WHERE usuario = :usuario AND senha = :senha");
 $statement->bindParam(':usuario', $usuario);
 $statement->bindParam(':senha', $senha);
 $statement->execute();
