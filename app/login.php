@@ -28,7 +28,7 @@ session_start();
 			<div class="container has-text-centered">
 				<div class="column is-4 is-offset-4">
 					<h3 class="title has-text-grey">Sistema de Login</h3>
-					<h3 class="title has-text-grey">Monteiro Lobato</h3>
+					<h3 class="title has-text-grey">Virtualização</h3>
 					<div class="box">
 						<form action="login-exec.php" method="POST">
 							<div class="field">
